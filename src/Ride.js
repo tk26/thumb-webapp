@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import timeOptions from './common/timeOptions.js';
 import NavBar from './NavBar.js';
 import PlacesAutocomplete from 'react-places-autocomplete';
+import { baseUrlAPI } from './common/baseUrl.js';
 
 const initialState = { 
     from_location: '', to_location: '',
@@ -26,7 +27,7 @@ class Ride extends Component {
     }
 
     submitRide() {
-        fetch('http://localhost:2611/ride/submit', {
+        fetch(baseUrlAPI[process.env.NODE_ENV] + '/ride/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -59,8 +60,7 @@ class Ride extends Component {
 
     render() {
         if(!this.state.token) {
-            // go to webapp Home
-            window.location.href = "http://localhost:3000/#/login/";
+            window.location.href = '/#/';
         }
 
         if(this.state.submissionSuccess) {

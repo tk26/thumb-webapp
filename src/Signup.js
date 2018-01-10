@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Container, Header, Image, Message, Button, Dropdown, Form } from 'semantic-ui-react';
 import schoolOptions from './common/schoolOptions.js';
 import NavBar2 from './NavBar2';
+import { baseUrlAPI } from './common/baseUrl.js';
 
 const initialState = { 
     firstName: '', lastName: '', email: '',
@@ -23,7 +24,7 @@ class Signup extends Component {
     }
 
     saveUser() {
-        fetch('http://localhost:2611/user/create', {
+        fetch(baseUrlAPI[process.env.NODE_ENV] + '/user/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +43,7 @@ class Signup extends Component {
     }
 
     savePotentialUser() {
-        fetch('http://localhost:2611/user/potential/create', {
+        fetch(baseUrlAPI[process.env.NODE_ENV] + '/user/potential/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -75,8 +76,7 @@ class Signup extends Component {
 
     render() {
         if(this.state.token) {
-            // go to webapp Home
-            window.location.href = "http://localhost:3000/";
+            window.location.href = '/#/';
         }
 
         const { 

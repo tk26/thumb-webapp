@@ -3,6 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Container, Header, Message, Button, Form, Segment, Divider } from 'semantic-ui-react';
 import NavBar2 from './NavBar2.js';
 import cookie from 'react-cookies';
+import { baseUrlAPI } from './common/baseUrl.js';
 
 const initialState = { 
     email: ''
@@ -19,7 +20,7 @@ class Forgot extends Component {
     }
 
     sendPasswordResetEmail() {
-        fetch('http://localhost:2611/user/forgot', {
+        fetch(baseUrlAPI[process.env.NODE_ENV] + '/user/forgot', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,8 +46,7 @@ class Forgot extends Component {
 
     render() {
         if(this.state.token) {
-            // go to webapp Home
-            window.location.href = "http://localhost:3000/";
+            window.location.href = '/#/';
         }
 
         if(this.state.submissionSuccess) {
@@ -104,10 +104,10 @@ class Forgot extends Component {
 
                     <Segment padded>
                         Remember it already? <br/>
-                        <Button primary fluid href='http://localhost:3000/#/login/'>Login</Button>
+                        <Button primary fluid href='/#/login/'>Login</Button>
                         <Divider horizontal>Or</Divider>
                         Do not have an account yet?
-                        <Button secondary fluid href='http://localhost:3000/#/signup/'>Sign Up Now</Button>
+                        <Button secondary fluid href='/#/signup/'>Sign Up Now</Button>
                     </Segment>
                 </Container>
             </div>

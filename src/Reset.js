@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Container, Header, Message, Button, Form, Segment, Divider } from 'semantic-ui-react';
 import NavBar2 from './NavBar2.js';
+import { baseUrlAPI } from './common/baseUrl.js';
 
 const initialState = { 
     password: '', confirmedPassword: ''
@@ -21,7 +22,7 @@ class Reset extends Component {
     }
 
     resetUserPassword() {
-        fetch('http://localhost:2611/user/reset', {
+        fetch(baseUrlAPI[process.env.NODE_ENV] + '/user/reset', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,8 +50,7 @@ class Reset extends Component {
 
     render() {
         if(this.state.token) {
-            // go to webapp Home
-            window.location.href = "http://localhost:3000/";
+            window.location.href = '/#/';
         }
 
         const { password, confirmedPassword } = this.state
@@ -93,10 +93,10 @@ class Reset extends Component {
 
                         <Segment padded>
                             Remember it already? <br/>
-                            <Button primary fluid href='http://localhost:3000/#/login/'>Login</Button>
+                            <Button primary fluid href='/#/login/'>Login</Button>
                             <Divider horizontal>Or</Divider>
                             Do not have an account yet?
-                            <Button secondary fluid href='http://localhost:3000/#/signup/'>Sign Up Now</Button>
+                            <Button secondary fluid href='/#/signup/'>Sign Up Now</Button>
                         </Segment>
 
                         {errorMessagesDOM}
@@ -112,7 +112,7 @@ class Reset extends Component {
                         <Message success>
                             All set, we're good to go!
                         </Message>
-                        <Button primary fluid href='http://localhost:3000/#/login/'>Login</Button>
+                        <Button primary fluid href='/#/login/'>Login</Button>
                     </Container>
 
                     :
