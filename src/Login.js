@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Container, Header, Message, Button, Form } from 'semantic-ui-react';
 import NavBar2 from './NavBar2';
+import { baseUrlAPI, baseUrlWebapp } from './common/baseUrl.js'
 
 const initialState = { 
     email: '', password: ''
@@ -19,7 +20,7 @@ class Login extends Component {
     }
 
     authenticateUser() {
-        fetch('http://localhost:2611/user/login', {
+        fetch(baseUrlAPI[process.env.NODE_ENV] + '/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +34,7 @@ class Login extends Component {
         .then( (response) => {
             cookie.save('token', response.token, { path: '/' })
             // go to webapp Home
-            window.location.href = "http://localhost:3000/";
+            window.location.href = baseUrlWebapp[process.env.NODE_ENV];
         })
         .catch( () => this.setState({ invalidCredentials : true }) );
     }
@@ -49,7 +50,7 @@ class Login extends Component {
     render() {
         if(this.state.token) {
             // go to webapp Home
-            window.location.href = "http://localhost:3000/";
+            window.location.href = baseUrlWebapp[process.env.NODE_ENV];
         }
 
         const { email, password } = this.state
