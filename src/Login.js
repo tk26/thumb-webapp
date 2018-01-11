@@ -33,6 +33,7 @@ class Login extends Component {
         .then(this.handleErrors)
         .then( (response) => {
             cookie.save('token', response.token, { path: '/' })
+            cookie.save('userPublicId', response.userPublicId, {path : '/'})
             window.location.href = '/#/';
         })
         .catch( () => this.setState({ invalidCredentials : true }) );

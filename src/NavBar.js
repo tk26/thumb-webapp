@@ -8,12 +8,16 @@ class NavBar extends Component {
 
     logout() {
         cookie.remove('token', { path: '/' })
+        cookie.remove('userPublicId', { path: '/' })
         // refresh
         window.location.reload();
     }
 
     componentWillMount() {
-        this.setState({ token: cookie.load('token') });
+        this.setState({ 
+            token: cookie.load('token'),
+            userPublicId: cookie.load('userPublicId')
+        });
     }
 
     render() {
@@ -76,7 +80,7 @@ class NavBar extends Component {
 
                             <Dropdown item icon='user circle outline'>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item as='a' href='/#/profile' text='Profile' icon='user'/>
+                                    <Dropdown.Item as='a' href={'/#/profile/user/' + this.state.userPublicId + '/'} text='Profile' icon='user'/>
                                     <Dropdown.Item as='a' text='Settings' icon='settings'/>
                                     <Dropdown.Item as='a' text='Help' icon='help'/>
                                     <Dropdown.Item as='a' text='About' icon='info circle'/>

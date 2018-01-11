@@ -21,7 +21,7 @@ class Main extends Component {
                   <Route path="/ride" component={Ride}/>
                   <Route path="/drive" component={Drive}/>
                   <Route path="/reset/:reset_token" component={Reset}/>
-                  <Route path="/profile" component={Profile}/>
+                  <Route path="/profile/user/:user_public_id" component={Profile}/>
               </Switch>
             </HashRouter>
         );
