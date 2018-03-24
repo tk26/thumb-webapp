@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Container, Header, Message, Button, Form, Segment, Divider } from 'semantic-ui-react';
+import { Container, Header, Message, Button, Form } from 'semantic-ui-react';
 import NavBar2 from './NavBar2.js';
 import cookie from 'react-cookies';
 import { baseUrlAPI } from './common/baseUrl.js';
@@ -102,13 +102,21 @@ class Forgot extends Component {
                         null
                     }
 
-                    <Segment padded>
+                    {/*<Segment padded>
                         Remember it already? <br/>
                         <Button primary fluid href='/#/login/'>Login</Button>
                         <Divider horizontal>Or</Divider>
                         Do not have an account yet?
                         <Button secondary fluid href='/#/signup/'>Sign Up Now</Button>
-                    </Segment>
+                    </Segment>*/}
+
+                    <Message
+                        info
+                        size='mini'
+                        header='Having some issues...?'
+                        content='Feel free to email us: support@thumbtravel.com'
+                    />
+
                 </Container>
             </div>
         );
