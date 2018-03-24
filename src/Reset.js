@@ -1,13 +1,15 @@
 import cookie from 'react-cookies';
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Container, Header, Message, Button, Form, Segment, Divider } from 'semantic-ui-react';
+import { Container, Header, Message, Button, Form } from 'semantic-ui-react';
 import NavBar2 from './NavBar2.js';
 import { baseUrlAPI } from './common/baseUrl.js';
 
 const initialState = { 
     password: '', confirmedPassword: ''
 };
+
+const regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
 class Reset extends Component {
     state = initialState;
@@ -57,6 +59,14 @@ class Reset extends Component {
 
         this.errorMessages = [];
 
+        if(password.length < 8 || password.length > 30) {
+            this.errorMessages.push('Password should be between 8 to 30 characters');
+        }
+        
+        if(!regex.test(password)) {
+            this.errorMessages.push('Password should be a combinaton of upper and lowercase letters, a number and a special character');
+        }
+
         if (password !== confirmedPassword) {
             this.errorMessages.push('Passwords don\'t match');
         }
@@ -91,13 +101,20 @@ class Reset extends Component {
                             <Button type='submit'>Submit</Button>
                         </Form>
 
-                        <Segment padded>
+                        {/*<Segment padded>
                             Remember it already? <br/>
                             <Button primary fluid href='/#/login/'>Login</Button>
                             <Divider horizontal>Or</Divider>
                             Do not have an account yet?
                             <Button secondary fluid href='/#/signup/'>Sign Up Now</Button>
-                        </Segment>
+                        </Segment>*/}
+
+                        <Message
+                            info
+                            size='mini'
+                            header='Having some issues...?'
+                            content='Feel free to email us: support@thumbtravel.com'
+                        />
 
                         {errorMessagesDOM}
 
@@ -110,9 +127,10 @@ class Reset extends Component {
                             Reset Password
                         </Header>
                         <Message success>
-                            All set, we're good to go!
+                            You have successfully updated your password! 
+                            We sent you a confirmation email, but go ahead and log in to thumb using the mobile app.
                         </Message>
-                        <Button primary fluid href='/#/login/'>Login</Button>
+                        {/*<Button primary fluid href='/#/login/'>Login</Button>*/}
                     </Container>
 
                     :
